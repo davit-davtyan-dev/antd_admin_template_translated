@@ -16,7 +16,7 @@ import EditForm from "./forms/editForm"
 const { Column } = Table;
 const { Panel } = Collapse;
 class TableComponent extends Component {
-  _isMounted = false; // 这个变量是用来标志当前组件是否挂载
+  _isMounted = false; // This variable is used to mark whether the current component is mounted.
   state = {
     list: [],
     loading: false,
@@ -112,7 +112,7 @@ class TableComponent extends Component {
   };
   handleDelete = (row) => {
     deleteItem({id:row.id}).then(res => {
-      message.success("删除成功")
+      message.success("successfully deleted")
       this.fetchData();
     })
   }
@@ -138,12 +138,12 @@ class TableComponent extends Component {
       editItem(values).then((response) => {
         form.resetFields();
         this.setState({ editModalVisible: false, editModalLoading: false });
-        message.success("编辑成功!")
+        message.success("Edited success!")
         this.fetchData()
       }).catch(e => {
-        message.success("编辑失败,请重试!")
+        message.success("Editing fails, please try again!")
       })
-      
+
     });
   };
 
@@ -156,12 +156,12 @@ class TableComponent extends Component {
     return (
       <div className="app-container">
         <Collapse defaultActiveKey={["1"]}>
-          <Panel header="筛选" key="1">
+          <Panel header="filter" key="1">
             <Form layout="inline">
-              <Form.Item label="标题:">
+              <Form.Item label="title:">
                 <Input onChange={this.filterTitleChange} />
               </Form.Item>
-              <Form.Item label="类型:">
+              <Form.Item label="Types of:">
                 <Select
                   style={{ width: 120 }}
                   onChange={this.filterStatusChange}>
@@ -169,7 +169,7 @@ class TableComponent extends Component {
                   <Select.Option value="draft">draft</Select.Option>
                 </Select>
               </Form.Item>
-              <Form.Item label="推荐指数:">
+              <Form.Item label="Recommended:">
                 <Select
                   style={{ width: 120 }}
                   onChange={this.filterStarChange}>
@@ -180,7 +180,7 @@ class TableComponent extends Component {
               </Form.Item>
               <Form.Item>
                 <Button type="primary" icon="search" onClick={this.fetchData}>
-                  搜索
+                  search
                 </Button>
               </Form.Item>
             </Form>
@@ -194,12 +194,12 @@ class TableComponent extends Component {
           loading={this.state.loading}
           pagination={false}
         >
-          <Column title="序号" dataIndex="id" key="id" width={200} align="center" sorter={(a, b) => a.id - b.id}/>
-          <Column title="标题" dataIndex="title" key="title" width={200} align="center"/>
-          <Column title="作者" dataIndex="author" key="author" width={100} align="center"/>
-          <Column title="阅读量" dataIndex="readings" key="readings" width={195} align="center"/>
-          <Column title="推荐指数" dataIndex="star" key="star" width={195} align="center"/>
-          <Column title="状态" dataIndex="status" key="status" width={195} align="center" render={(status) => {
+          <Column title="Serial number" dataIndex="id" key="id" width={200} align="center" sorter={(a, b) => a.id - b.id}/>
+          <Column title="title" dataIndex="title" key="title" width={200} align="center"/>
+          <Column title="author" dataIndex="author" key="author" width={100} align="center"/>
+          <Column title="Reading quantity" dataIndex="readings" key="readings" width={195} align="center"/>
+          <Column title="Recommended" dataIndex="star" key="star" width={195} align="center"/>
+          <Column title="condition" dataIndex="status" key="status" width={195} align="center" render={(status) => {
             let color =
               status === "published" ? "green" : status === "deleted" ? "red" : "";
             return (
@@ -208,12 +208,12 @@ class TableComponent extends Component {
               </Tag>
             );
           }}/>
-          <Column title="时间" dataIndex="date" key="date" width={195} align="center"/>
-          <Column title="操作" key="action" width={195} align="center"render={(text, row) => (
+          <Column title="time" dataIndex="date" key="date" width={195} align="center"/>
+          <Column title="operate" key="action" width={195} align="center"render={(text, row) => (
             <span>
-              <Button type="primary" shape="circle" icon="edit" title="编辑" onClick={this.handleEdit.bind(null,row)}/>
+              <Button type="primary" shape="circle" icon="edit" title="edit" onClick={this.handleEdit.bind(null,row)}/>
               <Divider type="vertical" />
-              <Button type="primary" shape="circle" icon="delete" title="删除" onClick={this.handleDelete.bind(null,row)}/>
+              <Button type="primary" shape="circle" icon="delete" title="delete" onClick={this.handleDelete.bind(null,row)}/>
             </span>
           )}/>
         </Table>
@@ -221,7 +221,7 @@ class TableComponent extends Component {
         <Pagination
           total={this.state.total}
           pageSizeOptions={["10", "20", "40"]}
-          showTotal={(total) => `共${total}条数据`}
+          showTotal={(total) => `common${total}Article data`}
           onChange={this.changePage}
           current={this.state.listQuery.pageNumber}
           onShowSizeChange={this.changePageSize}
@@ -236,7 +236,7 @@ class TableComponent extends Component {
           confirmLoading={this.state.editModalLoading}
           onCancel={this.handleCancel}
           onOk={this.handleOk}
-        />  
+        />
       </div>
     );
   }

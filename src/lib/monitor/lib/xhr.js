@@ -8,26 +8,26 @@ export function injectXHR() {
         }
         return oldOpen.apply(this, arguments);
     }
-    //axios 背后有两种 如果 browser XMLHttpRequest  node http
+    //There are two kinds behind the AXIOS, if Browser XMLHttpRequest Node HTTP
     let oldSend = XMLHttpRequest.prototype.send;
-    //fetch怎么监听
+    //How to listen for fetch
     XMLHttpRequest.prototype.send = function (body) {
         if (this.logData) {
-            let startTime = Date.now();//在发送之前记录一下开始的时间
-            //XMLHttpRequest  readyState 0 1 2 3 4
-            //status 2xx 304 成功 其它 就是失败
+            let startTime = Date.now();//Record the time starting before sending
+            //xmlhttprequestReadyState01234
+            //STATUS 2XX 304 successful other is failed
             let handler = (type) => (event) => {
                 let duration = Date.now() - startTime;
-                let status = this.status;//200 500
-                let statusText = this.statusText;// OK Server Error
+                let status = this.status;//200500
+                let statusText = this.statusText;//OK Server Error
                 tracker.send({
                     kind: 'stability',
                     type: 'xhr',
-                    eventType: type,//load error abort
-                    pathname: this.logData.url,//请求路径
-                    status: status + '-' + statusText,//状态码
-                    duration,//持续时间
-                    response: this.response ? JSON.stringify(this.response) : '',//响应体
+                    eventType: type,//loadErrorAbort
+                    pathname: this.logData.url,//Request path
+                    status: status + '-' + statusText,//status code
+                    duration,//duration
+                    response: this.response ? JSON.stringify(this.response) : '',//Respond to body
                     params: body || ''
                 });
             }

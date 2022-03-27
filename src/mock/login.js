@@ -8,23 +8,23 @@ const users = {
   "admin-token": {
     id: "admin",
     role: "admin",
-    name: "难凉热血",
+    name: "Cool cool blood",
     avatar: "https://s1.ax1x.com/2020/04/28/J5hUaT.jpg",
-    description: "拥有系统内所有菜单和路由权限",
+    description: "Has all menus and route permissions in the system",
   },
   "editor-token": {
     id: "editor",
     role: "editor",
-    name: "编辑员",
+    name: "editor",
     avatar: "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
-    description:"可以看到除户管理页面之外的所有页面",
+    description:"You can see all pages other than the account management page.",
   },
   "guest-token": {
     id: "guest",
     role: "guest",
-    name: "游客",
+    name: "Tourist",
     avatar: "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
-    description:"仅能看到Dashboard、作者博客、权限测试和关于作者四个页面",
+    description:"Can only see Dashboard, author blog, permission test, and four pairs of authors",
   },
 };
 
@@ -35,7 +35,7 @@ export default {
     if (!token) {
       return {
         status: 1,
-        message: "用户名或密码错误",
+        message: "wrong user name or password",
       };
     }
     return {
@@ -49,7 +49,7 @@ export default {
     if (!userInfo) {
       return {
         status: 1,
-        message: "获取用户信息失败",
+        message: "Get user information failure",
       };
     }
     return {

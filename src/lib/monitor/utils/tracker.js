@@ -11,13 +11,13 @@ function getExtraData() {
     userAgent: userAgent.parse(navigator.userAgent).name,
   };
 }
-//gif图片做上传 图片速度 快没有跨域 问题，
+//GIF picture is made uploaded pictures, there is no cross-domain problem,
 class SendTracker {
   // send(data = {}) {
   //   let extraData = getExtraData();
   //   let logInfo = { ...extraData, ...data };
 
-  //   // 图片打点
+  //   // Picture point
   //   const img = new window.Image();
   //   img.src = `${feeTarget}?d=${encodeURIComponent(JSON.stringify(logInfo))}`;
   // }

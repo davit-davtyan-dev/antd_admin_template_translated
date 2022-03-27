@@ -22,20 +22,20 @@ const addCustomize = () => (config) => {
   return config;
 };
 module.exports = override(
-  // 针对antd实现按需打包: 根据import来打包(使用babel-plugin-import)
+  // Directance on ANTD Package: Package (use Babel-Plugin-Import) according to IMPORT
   fixBabelImports("import", {
     libraryName: "antd",
     libraryDirectory: "es",
-    style: true, // 自动打包相关的样式
+    style: true, // Automatic packaging related styles
   }),
 
-  // 使用less-loader对源码中的less的变量进行重新指定
+  // Use LESS-Loader to re-specify the variables of the LESS in the source code
   addLessLoader({
     javascriptEnabled: true,
     modifyVars: { "@primary-color": "#1DA57A" },
   }),
 
-  // 配置路径别名
+  // Configure path alias
   addWebpackAlias({
     "@": resolve("src"),
   }),

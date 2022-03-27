@@ -4,15 +4,15 @@ import { Breadcrumb } from "antd";
 import menuList from "@/config/menuConfig";
 import "./index.less";
 /**
- * 根据当前浏览器地址栏的路由地址，在menuConfig中查找路由跳转的路径
- * 如路由地址为/charts/keyboard,则查找到的路径为[{title: "图表",...},{title: "键盘图表",...}]
+ * Find the path of routing jump in the MenuConfig according to the routing address of the current browser address bar.
+ * If the route address is/charts/keyboard,Then find the path to[{title: "chart",...},{title: "Keyboard chart",...}]
  */
 const getPath = (menuList, pathname) => {
   let temppath = [];
   try {
     function getNodePath(node) {
       temppath.push(node);
-      //找到符合条件的节点，通过throw终止掉递归
+      //Find the eligible node and terminate it through the THROW
       if (node.path === pathname) {
         throw new Error("GOT IT!");
       }
@@ -20,10 +20,10 @@ const getPath = (menuList, pathname) => {
         for (var i = 0; i < node.children.length; i++) {
           getNodePath(node.children[i]);
         }
-        //当前节点的子节点遍历完依旧没找到，则删除路径中的该节点
+        //The child node of the current node is still not found, then the node in the path is deleted.
         temppath.pop();
       } else {
-        //找到叶子节点时，删除路径当中的该叶子节点
+        //When you find the leaves node, remove the leaves node in the path.
         temppath.pop();
       }
     }
@@ -40,15 +40,15 @@ const BreadCrumb = (props) => {
   const { pathname } = location;
   let path = getPath(menuList, pathname);
   const first = path && path[0];
-  if (first && first.title.trim() !== "首页") {
-    path = [{ title: "首页", path: "/dashboard" }].concat(path);
+  if (first && first.title.trim() !== "front page") {
+    path = [{ title: "front page", path: "/dashboard" }].concat(path);
   }
   return (
     <div className="Breadcrumb-container">
       <Breadcrumb>
         {path &&
           path.map((item) =>
-            item.title === "首页" ? (
+            item.title === "front page" ? (
               <Breadcrumb.Item key={item.path}>
                 <a href={`#${item.path}`}>{item.title}</a>
               </Breadcrumb.Item>

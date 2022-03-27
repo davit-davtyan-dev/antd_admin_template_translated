@@ -174,15 +174,15 @@ export function export_json_to_excel({
   }
 
   if (autoWidth) {
-    /*设置worksheet每列的最大宽度*/
+    /*Set the maximum width of each column of Worksheet*/
     const colWidth = data.map(row => row.map(val => {
-      /*先判断是否为null/undefined*/
+      /*Judgment is NULL first/undefined*/
       if (val == null) {
         return {
           'wch': 10
         };
       }
-      /*再判断是否为中文*/
+      /*Rethinking if it is Chinese*/
       else if (val.toString().charCodeAt(0) > 255) {
         return {
           'wch': val.toString().length * 2
@@ -193,7 +193,7 @@ export function export_json_to_excel({
         };
       }
     }))
-    /*以第一行为初始值*/
+    /*Initial value with the first behavior*/
     let result = colWidth[0];
     for (let i = 1; i < colWidth.length; i++) {
       for (let j = 0; j < colWidth[i].length; j++) {

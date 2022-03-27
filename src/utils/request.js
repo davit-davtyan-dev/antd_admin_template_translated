@@ -4,18 +4,18 @@ import { Modal } from "antd";
 import { getToken } from "@/utils/auth";
 import { logout } from "@/store/actions";
 
-//创建一个axios示例
+//Create an AXIOS example
 const service = axios.create({
-  baseURL: process.env.REACT_APP_BASE_API, // api 的 base_url
+  baseURL: process.env.REACT_APP_BASE_API, // api of base_url
   timeout: 5000, // request timeout
 });
 
-// 请求拦截器
+// Request interceptor
 service.interceptors.request.use(
   (config) => {
     // Do something before request is sent
     if (store.getState().user.token) {
-      // 让每个请求携带token-- ['Authorization']为自定义key 请根据实际情况自行修改
+      // Let each request carry token - ['Authorization'] for custom keys, please modify according to the actual situation
       config.headers.Authorization = getToken();
     }
     return config;
@@ -27,14 +27,14 @@ service.interceptors.request.use(
   }
 );
 
-// 响应拦截器
+// Response interceptor
 service.interceptors.response.use(
   (response) => response,
   /**
-   * 下面的注释为通过在response里，自定义code来标示请求状态
-   * 当code返回如下情况则说明权限有问题，登出并返回到登录页
-   * 如想通过 xmlhttprequest 来状态码标识 逻辑可写在下面error中
-   * 以下代码均为样例，请结合自生需求加以修改，若不需要，则可删除
+   * The following comment is to mark the request status by custom Code in response
+   * When the code returns the following case, the permissions have problems, log out and return to the login page.
+   * If you want to use the XMLHTTPRequest to write the status code logic to be written in Error
+   * The following code is sample, please modify it in combination, if you don't need it, you can delete it.
    */
   // response => {
   //   const res = response.data
@@ -44,17 +44,17 @@ service.interceptors.response.use(
   //       type: 'error',
   //       duration: 5 * 1000
   //     })
-  //     // 50008:非法的token; 50012:其他客户端登录了;  50014:Token 过期了;
+  //     // 50008:Illegal token; 50012: Other clients are logged in; 50014: Token expired;
   //     if (res.code === 50008 || res.code === 50012 || res.code === 50014) {
-  //       // 请自行在引入 MessageBox
+  //       // Please introduce it yourself MessageBox
   //       // import { Message, MessageBox } from 'element-ui'
-  //       MessageBox.confirm('你已被登出，可以取消继续留在该页面，或者重新登录', '确定登出', {
-  //         confirmButtonText: '重新登录',
-  //         cancelButtonText: '取消',
+  //       MessageBox.confirm('You have been logged out, you can cancel the page, or log in again', 'Determine', {
+  //         confirmButtonText: 're-register',
+  //         cancelButtonText: 'Cancel',
   //         type: 'warning'
   //       }).then(() => {
   //         store.dispatch('FedLogOut').then(() => {
-  //           location.reload() // 为了重新实例化vue-router对象 避免bug
+  //           location.reload() // In order to re-instantiate the Vue-router object to avoid BUG
   //         })
   //       })
   //     }
@@ -68,11 +68,11 @@ service.interceptors.response.use(
     const { status } = error.response;
     if (status === 403) {
       Modal.confirm({
-        title: "确定登出?",
+        title: "Determine?",
         content:
-          "由于长时间未操作，您已被登出，可以取消继续留在该页面，或者重新登录",
-        okText: "重新登录",
-        cancelText: "取消",
+          "Since you have not been operated for a long time, you have been logged out, you can cancel the page, or log in again",
+        okText: "re-register",
+        cancelText: "Cancel",
         onOk() {
           let token = store.getState().user.token;
           store.dispatch(logout(token));

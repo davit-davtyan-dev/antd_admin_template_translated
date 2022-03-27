@@ -22,7 +22,7 @@ const LayoutContent = (props) => {
   const { role, location } = props;
   const { pathname } = location;
   const handleFilter = (route) => {
-    // 过滤没有权限的页面
+    // Filtering no permissions page
     return role === "admin" || !route.roles || route.roles.includes(role);
   };
   return (

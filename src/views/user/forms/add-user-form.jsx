@@ -6,15 +6,15 @@ class AddUserForm extends Component {
   validatUserID = async (rule, value, callback) => {
     if (value) {
       if (!/^[a-zA-Z0-9]{1,6}$/.test(value)) {
-        callback("用户ID必须为1-6位数字或字母组合");
+        callback("User ID must be 1-6 digits or letters");
       }
       let res = await reqValidatUserID(value);
       const { status } = res.data;
       if (status) {
-        callback("该用户ID已存在");
+        callback("The user ID already exists");
       }
     } else {
-      callback("请输入用户ID");
+      callback("Please enter the user ID");
     }
     callback();
   };
@@ -31,24 +31,24 @@ class AddUserForm extends Component {
     };
     return (
       <Modal
-        title="编辑"
+        title="edit"
         visible={visible}
         onCancel={onCancel}
         onOk={onOk}
         confirmLoading={confirmLoading}
       >
         <Form {...formItemLayout}>
-          <Form.Item label="用户ID:">
+          <Form.Item label="User ID:">
             {getFieldDecorator("id", {
               rules: [{ required: true, validator: this.validatUserID }],
-            })(<Input placeholder="请输入用户ID" />)}
+            })(<Input placeholder="Please enter the user ID" />)}
           </Form.Item>
-          <Form.Item label="用户名称:">
+          <Form.Item label="user name:">
             {getFieldDecorator("name", {
-              rules: [{ required: true, message: "请输入用户名称!" }],
-            })(<Input placeholder="请输入用户名称" />)}
+              rules: [{ required: true, message: "Please enter the user name!" }],
+            })(<Input placeholder="Please enter the user name" />)}
           </Form.Item>
-          <Form.Item label="用户角色:">
+          <Form.Item label="User role:">
             {getFieldDecorator("role", {
               initialValue: "admin",
             })(
@@ -58,9 +58,9 @@ class AddUserForm extends Component {
               </Select>
             )}
           </Form.Item>
-          <Form.Item label="用户描述:">
+          <Form.Item label="User description:">
             {getFieldDecorator("description", {
-            })(<TextArea rows={4} placeholder="请输入用户描述" />)}
+            })(<TextArea rows={4} placeholder="Please enter the user description" />)}
           </Form.Item>
         </Form>
       </Modal>

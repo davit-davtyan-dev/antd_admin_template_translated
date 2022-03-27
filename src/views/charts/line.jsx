@@ -32,7 +32,7 @@ class LineChart extends Component {
     if (!this.state.chart) {
       return;
     }
-    window.removeEventListener("resize", () => this.resize()); // 移除窗口，变化时重置图表
+    window.removeEventListener("resize", () => this.resize()); // Remove the chart when removing the window, change
     this.setState({ chart: null });
   }
 

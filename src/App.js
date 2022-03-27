@@ -1,14 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import { Provider } from "react-redux";
 import { ConfigProvider } from "antd";
-import zhCN from "antd/es/locale/zh_CN";
 import store from "./store";
 import Router from "./router";
 
 class App extends Component {
-  render() { 
+  render() {
     return (
-      <ConfigProvider locale={zhCN}>
+      <ConfigProvider>
         <Provider store={store}>
           <Router />
         </Provider>
@@ -16,5 +15,5 @@ class App extends Component {
     );
   }
 }
- 
+
 export default App;

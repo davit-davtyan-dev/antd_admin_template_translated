@@ -41,7 +41,7 @@ const columns = [
   },
 ];
 class Zip extends Component {
-  _isMounted = false; // 这个变量是用来标志当前组件是否挂载
+  _isMounted = false; // This variable is used to mark whether the current component is mounted.
   state = {
     list: [],
     filename: "file",
@@ -69,7 +69,7 @@ class Zip extends Component {
   };
   handleDownload = (type) => {
     if (type === "selected" && this.state.selectedRowKeys.length === 0) {
-      message.error("至少选择一项进行导出");
+      message.error("At least one item is selected");
       return;
     }
     this.setState({
@@ -88,7 +88,7 @@ class Zip extends Component {
         this.state.filename
       );
       this.setState({
-        selectedRowKeys: [], // 导出完成后将多选框清空
+        selectedRowKeys: [], // After the export is complete, you will empty the box.
         downloadLoading: false,
       });
     });
@@ -110,15 +110,15 @@ class Zip extends Component {
     return (
       <div className="app-container">
         <Collapse defaultActiveKey={["1"]}>
-          <Panel header="导出选项" key="1">
+          <Panel header="Export option" key="1">
             <Form layout="inline">
-              <Form.Item label="文件名:">
+              <Form.Item label="file name:">
                 <Input
                   style={{ width: "250px" }}
                   prefix={
                     <Icon type="file" style={{ color: "rgba(0,0,0,.25)" }} />
                   }
-                  placeholder="请输入文件名(默认file)"
+                  placeholder="Please enter the file name(Default file)"
                   onChange={this.filenameChange}
                 />
               </Form.Item>
@@ -128,7 +128,7 @@ class Zip extends Component {
                   icon="file-zip"
                   onClick={this.handleDownload.bind(null, "all")}
                 >
-                  全部导出
+                  All export
                 </Button>
               </Form.Item>
               <Form.Item>
@@ -137,7 +137,7 @@ class Zip extends Component {
                   icon="file-zip"
                   onClick={this.handleDownload.bind(null, "selected")}
                 >
-                  导出已选择项
+                  Export the selected item
                 </Button>
               </Form.Item>
             </Form>

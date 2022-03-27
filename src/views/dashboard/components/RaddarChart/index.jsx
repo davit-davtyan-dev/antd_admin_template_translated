@@ -49,7 +49,7 @@ class RaddarChart extends Component {
     if (!this.state.chart) {
       return;
     }
-    window.removeEventListener("resize", () => this.resize()); // 移除窗口，变化时重置图表
+    window.removeEventListener("resize", () => this.resize()); // Remove the chart when removing the window, change
     this.setState({ chart: null });
   }
 
@@ -59,8 +59,8 @@ class RaddarChart extends Component {
       tooltip: {
         trigger: "axis",
         axisPointer: {
-          // 坐标轴指示器，坐标轴触发有效
-          type: "shadow", // 默认为直线，可选为：'line' | 'shadow'
+          // Coordinate axis indicator, coordinate axis trigger effective
+          type: "shadow", // Default is straight, optional:'line' | 'shadow'
         },
       },
       radar: {

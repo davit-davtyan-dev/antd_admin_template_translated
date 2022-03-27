@@ -43,14 +43,14 @@ class UploadExcel extends Component {
       onChange(info) {
         const { status } = info.file;
         if (status === "done") {
-          message.success(`${info.file.name} 文件上传成功`);
+          message.success(`${info.file.name} Document upload success`);
         } else if (status === "error") {
-          message.error(`${info.file.name} 文件上传失败`);
+          message.error(`${info.file.name} File upload failed`);
         }
       },
       beforeUpload(file, fileList) {
         if (!isExcel(file)) {
-          message.error("仅支持上传.xlsx, .xls, .csv 文件");
+          message.error("Only support upload.xlsx, .xls, .csv document");
           return false;
         }
       },

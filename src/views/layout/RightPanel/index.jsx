@@ -48,7 +48,7 @@ const RightPanel = (props) => {
   return (
     <div className="rightSettings">
       <Drawer
-        title="系统设置"
+        title="System settings"
         placement="right"
         width={350}
         onClose={toggleSettingPanel}
@@ -56,12 +56,12 @@ const RightPanel = (props) => {
       >
         <Row>
           <Col span={12}>
-            <span>侧边栏 Logo</span>
+            <span>Sidebar Logo</span>
           </Col>
           <Col span={12}>
             <Switch
-              checkedChildren="开"
-              unCheckedChildren="关"
+              checkedChildren="open"
+              unCheckedChildren="close"
               defaultChecked={sidebarLogo}
               onChange={sidebarLogoChange}
             />
@@ -70,12 +70,12 @@ const RightPanel = (props) => {
         <Divider dashed />
         <Row>
           <Col span={12}>
-            <span>固定 Header</span>
+            <span>fixed Header</span>
           </Col>
           <Col span={12}>
             <Switch
-              checkedChildren="开"
-              unCheckedChildren="关"
+              checkedChildren="open"
+              unCheckedChildren="close"
               defaultChecked={fixedHeader}
               onChange={fixedHeaderChange}
             />
@@ -84,12 +84,12 @@ const RightPanel = (props) => {
         <Divider dashed />
         <Row>
           <Col span={12}>
-            <span>开启 Tags-View</span>
+            <span>Open Tags-View</span>
           </Col>
           <Col span={12}>
             <Switch
-              checkedChildren="开"
-              unCheckedChildren="关"
+              checkedChildren="open"
+              unCheckedChildren="close"
               defaultChecked={tagsView}
               onChange={tagsViewChange}
             />
@@ -99,15 +99,15 @@ const RightPanel = (props) => {
         <Row>
           <Col span={24}>
             <Alert
-              message="开发者请注意:"
-              description="配置栏只在开发环境用于预览，生产环境不会展现，请拷贝后手动修改/src/defaultSettings.js配置文件"
+              message="Developers please pay attention:"
+              description="The configuration bar is only used in the development environment for preview, the production environment will not present, please copy the /src/defaultsettings.js configuration file after copying"
               type="warning"
               showIcon
               icon={<Icon type="notification" />}
               style={{ marginBottom: "16px" }}
             />
             <Button style={{ width: "100%" }} icon="copy" onClick={handleCopy}>
-              拷贝配置
+              Copy configuration
             </Button>
           </Col>
         </Row>

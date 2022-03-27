@@ -21,14 +21,13 @@ const RichTextEditor = () => {
           wrapperClassName="wrapper-class"
           editorClassName="editor-class"
           toolbarClassName="toolbar-class"
-          localization={{ locale: "zh" }}
         />
       </Card>
       <br />
       <Row gutter={10}>
         <Col span={12}>
           <Card
-            title="同步转换HTML"
+            title="Synchronous conversion HTML"
             bordered={false}
             style={{ minHeight: 200 }}
           >
@@ -38,7 +37,7 @@ const RichTextEditor = () => {
         </Col>
         <Col span={12}>
           <Card
-            title="同步转换MarkDown"
+            title="Synchronous conversion MARKDOWN"
             bordered={false}
             style={{ minHeight: 200 }}
           >

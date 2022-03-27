@@ -1,24 +1,24 @@
 import React from "react";
-import clip from "@/utils/clipboard"; 
+import clip from "@/utils/clipboard";
 import { Button, Row, Col } from "antd";
 
 const text = `
-  我是要被复制的文字，
-  我是要被复制的文字，
-  我是要被复制的文字，
-  我是要被复制的文字，
-  我是要被复制的文字，
-  我是要被复制的文字，
-  我是要被复制的文字，
-  我是要被复制的文字，
-  我是要被复制的文字，
-  我是要被复制的文字，
-  我是要被复制的文字，
-  我是要被复制的文字，
-  我是要被复制的文字，
-  我是要被复制的文字，
-  我是要被复制的文字，
-  我是要被复制的文字
+  I am a text to be copied.
+  I am a text to be copied.
+  I am a text to be copied.
+  I am a text to be copied.
+  I am a text to be copied.
+  I am a text to be copied.
+  I am a text to be copied.
+  I am a text to be copied.
+  I am a text to be copied.
+  I am a text to be copied.
+  I am a text to be copied.
+  I am a text to be copied.
+  I am a text to be copied.
+  I am a text to be copied.
+  I am a text to be copied.
+  I am a text to be copied
   `;
 const handleCopy = (text, event) => {
   clip(text, event);
@@ -26,7 +26,7 @@ const handleCopy = (text, event) => {
 const Clipboard = () => {
   return (
     <div className="app-container">
-      <h1>点击下方的Copy按钮，可将以下文字复制到剪贴板</h1>
+      <h1>Click the Copy button below to copy the following text to the clipboard</h1>
       <br />
       <Row>
         <Col span={12}>{text}</Col>

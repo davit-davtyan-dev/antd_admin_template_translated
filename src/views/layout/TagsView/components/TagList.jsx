@@ -17,16 +17,16 @@ class TagList extends Component {
     const path = tag.path;
     const currentPath = history.location.pathname;
     const length = taglist.length;
-    // 如果关闭的是当前页，跳转到最后一个tag
+    // If it is closed, it is a current page, jump to the last Tag
     if (path === currentPath) {
       history.push(taglist[length - 1].path);
     }
-    // 如果关闭的是最后的tag ,且当前显示的也是最后的tag对应的页面，才做路由跳转
+    // If the last tag is closed, and the currently displayed page is also the page corresponding to the last TAG, the routing jump
     if (
       path === taglist[length - 1].path &&
       currentPath === taglist[length - 1].path
     ) {
-      // 因为cutTaglist在最后执行，所以跳转到上一个tags的对应的路由，应该-2
+      // Because Cuttaglist is executed, the corresponding route jumps to the previous tags, should be -2
       if (length - 2 > 0) {
         history.push(taglist[length - 2].path);
       } else if (length === 2) {
@@ -34,7 +34,7 @@ class TagList extends Component {
       }
     }
 
-    // 先跳转路由，再修改state树的taglist
+    // First jump the route, then modify the Taglist of the State tree
     deleteTag(tag);
   };
   handleClick = (path) => {
@@ -44,11 +44,11 @@ class TagList extends Component {
     event.preventDefault();
     const menuMinWidth = 105;
     const clickX = event.clientX;
-    const clickY = event.clientY; //事件发生时鼠标的Y坐标
+    const clickY = event.clientY; // Y coordinate of the mouse when the event occurs
     const clientWidth = this.tagListContainer.current.clientWidth; // container width
     const maxLeft = clientWidth - menuMinWidth; // left boundary
 
-    // 当鼠标点击位置大于左侧边界时，说明鼠标点击的位置偏右，将菜单放在左边
+    // When the mouse click position is greater than the left boundary, the position of the mouse click is right, put the menu on the left.
     if (clickX > maxLeft) {
       this.setState({
         left: clickX - menuMinWidth + 15,
@@ -57,7 +57,7 @@ class TagList extends Component {
         currentTag: tag,
       });
     } else {
-      // 反之，当鼠标点击的位置偏左，将菜单放在右边
+      // Conversely, when the position of the mouse is left, put the menu on the right
       this.setState({
         left: clickX,
         top: clickY,
@@ -139,8 +139,8 @@ class TagList extends Component {
             style={{ left: `${left}px`, top: `${top}px` }}
             ref={this.contextMenuContainer}
           >
-            <li onClick={this.handleCloseOtherTags}>关闭其他</li>
-            <li onClick={this.handleCloseAllTags}>关闭所有</li>
+            <li onClick={this.handleCloseOtherTags}>Close others</li>
+            <li onClick={this.handleCloseAllTags}>Close all</li>
           </ul>
         ) : null}
       </>

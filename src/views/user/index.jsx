@@ -33,15 +33,15 @@ class User extends Component {
   handleDeleteUser = (row) => {
     const { id } = row
     if (id === "admin") {
-      message.error("不能删除管理员用户！")
+      message.error("Can't delete administrator users!")
       return
     }
     deleteUser({id}).then(res => {
-      message.success("删除成功")
+      message.success("successfully deleted")
       this.getUsers();
     })
   }
-  
+
   handleEditUserOk = _ => {
     const { form } = this.editUserFormRef.props;
     form.validateFields((err, values) => {
@@ -52,12 +52,12 @@ class User extends Component {
       editUser(values).then((response) => {
         form.resetFields();
         this.setState({ editUserModalVisible: false, editUserModalLoading: false });
-        message.success("编辑成功!")
+        message.success("Edited success!")
         this.getUsers()
       }).catch(e => {
-        message.success("编辑失败,请重试!")
+        message.success("Editing fails, please try again!")
       })
-      
+
     });
   };
 
@@ -84,10 +84,10 @@ class User extends Component {
       addUser(values).then((response) => {
         form.resetFields();
         this.setState({ addUserModalVisible: false, addUserModalLoading: false });
-        message.success("添加成功!")
+        message.success("Added successfully!")
         this.getUsers()
       }).catch(e => {
-        message.success("添加失败,请重试!")
+        message.success("Adding a failure, please try again!")
       })
     });
   };
@@ -98,25 +98,25 @@ class User extends Component {
     const { users } = this.state
     const title = (
       <span>
-        <Button type='primary' onClick={this.handleAddUser}>添加用户</Button>
+        <Button type='primary' onClick={this.handleAddUser}>Add user</Button>
       </span>
     )
-    const cardContent = `在这里，你可以对系统中的用户进行管理，例如添加一个新用户，或者修改系统中已经存在的用户。`
+    const cardContent = `Here, you can manage users in the system, such as adding a new user, or modifying users already existing in the system.`
     return (
       <div className="app-container">
-        <TypingCard title='用户管理' source={cardContent} />
+        <TypingCard title="User Management" source={cardContent} />
         <br/>
         <Card title={title}>
           <Table bordered rowKey="id" dataSource={users} pagination={false}>
-            <Column title="用户ID" dataIndex="id" key="id" align="center"/>
-            <Column title="用户名称" dataIndex="name" key="name" align="center"/>
-            <Column title="用户角色" dataIndex="role" key="role" align="center"/>
-            <Column title="用户描述" dataIndex="description" key="description" align="center" />
-            <Column title="操作" key="action" width={195} align="center"render={(text, row) => (
+            <Column title="User ID" dataIndex="id" key="id" align="center"/>
+            <Column title="user name" dataIndex="name" key="name" align="center"/>
+            <Column title="User role" dataIndex="role" key="role" align="center"/>
+            <Column title="User description" dataIndex="description" key="description" align="center" />
+            <Column title="operate" key="action" width={195} align="center"render={(text, row) => (
               <span>
-                <Button type="primary" shape="circle" icon="edit" title="编辑" onClick={this.handleEditUser.bind(null,row)}/>
+                <Button type="primary" shape="circle" icon="edit" title="edit" onClick={this.handleEditUser.bind(null,row)}/>
                 <Divider type="vertical" />
-                <Button type="primary" shape="circle" icon="delete" title="删除" onClick={this.handleDeleteUser.bind(null,row)}/>
+                <Button type="primary" shape="circle" icon="delete" title="delete" onClick={this.handleDeleteUser.bind(null,row)}/>
               </span>
             )}/>
           </Table>
@@ -128,14 +128,14 @@ class User extends Component {
           confirmLoading={this.state.editUserModalLoading}
           onCancel={this.handleCancel}
           onOk={this.handleEditUserOk}
-        />  
+        />
         <AddUserForm
           wrappedComponentRef={formRef => this.addUserFormRef = formRef}
           visible={this.state.addUserModalVisible}
           confirmLoading={this.state.addUserModalLoading}
           onCancel={this.handleCancel}
           onOk={this.handleAddUserOk}
-        />  
+        />
       </div>
     );
   }

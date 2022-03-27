@@ -23,10 +23,10 @@ const LayoutHeader = (props) => {
   token && getUserInfo(token);
   const handleLogout = (token) => {
     Modal.confirm({
-      title: "注销",
-      content: "确定要退出系统吗?",
-      okText: "确定",
-      cancelText: "取消",
+      title: "Log out",
+      content: "Is it necessary to exit the system?",
+      okText: "Sure",
+      cancelText: "Cancel",
       onOk: () => {
         logout(token);
       },
@@ -44,19 +44,10 @@ const LayoutHeader = (props) => {
   const menu = (
     <Menu onClick={onClick}>
       <Menu.Item key="dashboard">
-        <Link to="/dashboard">首页</Link>
-      </Menu.Item>
-      <Menu.Item key="project">
-        <a
-          target="_blank"
-          href="https://github.com/NLRX-WJC/react-antd-admin-template"
-          rel="noopener noreferrer"
-        >
-          项目地址
-        </a>
+        <Link to="/dashboard">front page</Link>
       </Menu.Item>
       <Menu.Divider />
-      <Menu.Item key="logout">注销</Menu.Item>
+      <Menu.Item key="logout">Log out</Menu.Item>
     </Menu>
   );
   const computedStyle = () => {
@@ -80,8 +71,8 @@ const LayoutHeader = (props) => {
   };
   return (
     <>
-      {/* 这里是仿照antd pro的做法,如果固定header，
-      则header的定位变为fixed，此时需要一个定位为relative的header把原来的header位置撑起来 */}
+      {/* Here is the practice of antd pro, if Header is fixed,
+      Then the header is positioned to fixed. At this point, a header that is positioned to be relard puts the original Header position. */}
       {fixedHeader ? <Header /> : null}
       <Header
         style={computedStyle()}

@@ -1,14 +1,14 @@
-// 引入 ECharts 主模块
+// introduce the Echarts main module
 import echarts from 'echarts/lib/echarts'
-// 引入提示框和标题组件
+// introduce the prompt box and title component
 import 'echarts/lib/component/legend'
 import 'echarts/lib/component/title'
 
-import 'echarts/lib/chart/bar'     // 引入柱状图
-import 'echarts/lib/chart/radar'   // 引入雷达图
-import 'echarts/lib/chart/pie'   // 引入饼状图
-import 'echarts/lib/chart/line'   // 引入折线图
+import 'echarts/lib/chart/bar'     // introduce a histogram
+import 'echarts/lib/chart/radar'   // introduce radar chart
+import 'echarts/lib/chart/pie'   // introduce a pie chart
+import 'echarts/lib/chart/line'   // introduce a line chart
 
 
-require('echarts/theme/macarons') // echarts theme
+require('echarts/theme/macarons') //EchartsTheme
 export default echarts

@@ -13,10 +13,10 @@ const NotFound = (props) => {
       </Col>
       <Col span={12} className="right">
         <h1>404</h1>
-        <h2>抱歉，你访问的页面不存在</h2>
+        <h2>Sorry, the page you visited does not exist.</h2>
         <div>
           <Button type="primary" onClick={goHome}>
-            回到首页
+            back to the homepage
           </Button>
         </div>
       </Col>

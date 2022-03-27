@@ -4,24 +4,24 @@ import wechat from "@/assets/images/wechat.jpg";
 import reward from "@/assets/images/reward.jpg";
 const About = () => {
   const cardContent = `
-    <p>大家好，我是难凉热血。</p>
-    <p>终南山下码农一枚，师从道长王重阳，酷爱打码，崇尚开源精神，乐于分享。</p>
-    <p>2005年服役于中国人民解放军东南战区狼牙特种大队，担任狙击手。</p>
-    <p>2008年受俄罗斯阿尔法特种部队邀请，执教于该特种部队第一大队教授其队员学习中国特色社会主义理论及毛泽东思想。</p>
-    <p>2011年竞选美国总统落选，遂心灰意冷，放下所有荣誉，隐居终南山下。</p>
-    <p>2015年受道长王重阳委托，为道观开发香火管理系统，遂沉迷IT，无法自拔。</p>
-    <p>喜欢折腾和搞机，追求新鲜技术。</p>
-    <p>下边是我的微信，欢迎同好伙伴一起树(tree)新(new)风(bee)！！！</p>
-    <p>如果你觉得这个项目对你有些许帮助的话，欢迎赞赏哈。</p>
-    <p>您的赞赏，是我不断前进的动力！</p>
-    <p>Ps:最近好多朋友加我微信问我一些问题，结果问完连个 star 也不给我点，好心塞啊~~~</p>
-    <p>求大佬们点个 star 啦，感谢感谢~~</p>
+    <p>Hello everyone, I am hard to cool.</p>
+    <p>At the end of the South Mountain, a farmer, the teacher from the director Wang Zhongyang, loves to code, advocating the open source spirit, and is happy to share.</p>
+    <p>In 2005, it was served in the Southeastern Woods of the People's Liberation Army, served as a sniper.</p>
+    <p>In 2008, he was invited by Russia Alpha, and taught his team members to teach his team members to learn the theory of socialism with Chinese characteristics and Mao Zedong Thought.</p>
+    <p>In 2011, the president of the United States was asked, and the heart was shining, and all the honors were put down, and they were in the mountains.</p>
+    <p>In 2015, he was entrusted by the director Wang Zhongyang to develop incense management system for the Taoism.</p>
+    <p>I like to toss and engage in machine, pursue fresh technology.</p>
+    <p>Below is my WeChat, welcome to the trees (TREE) wind (BEE)!!!</p>
+    <p>If you think this project is a little help, welcome to appreciate.</p>
+    <p>Your appreciation is the power I have continuously moved!</p>
+    <p>PS: Recently, many friends add me WeChat asked me some problems. As a result, I didn't give me some star, I was so sweet ~~~</p>
+    <p>Ask the big people to point STAR, thank you ~~</p>
     <img src="${wechat}" alt="wechat" style="height:550px"/>
     <img src="${reward}" alt="reward" style="height:550px"/>
   `;
   return (
     <div className="app-container">
-      <TypingCard title="关于作者" source={cardContent} />
+      <TypingCard title="About author" source={cardContent} />
     </div>
   );
 };

@@ -9,7 +9,7 @@ import { getMenuItemInMenuListByProperty } from "@/utils";
 import menuList from "@/config/menuConfig";
 import "./index.less";
 const SubMenu = Menu.SubMenu;
-// 重新记录数组顺序
+//Record the order of array
 const reorder = (list, startIndex, endIndex) => {
   const result = Array.from(list);
   const [removed] = result.splice(startIndex, 1);
@@ -23,21 +23,21 @@ class Meun extends Component {
     openKey: [],
   };
 
-  // filterMenuItem用来根据配置信息筛选可以显示的菜单项
+  //FilterMenuItem is used to filter the menu item that can be displayed according to configuration information
   filterMenuItem = (item) => {
     const { roles } = item;
     const { role } = this.props;
     if (role === "admin" || !roles || roles.includes(role)) {
       return true;
     } else if (item.children) {
-      // 如果当前用户有此item的某个子item的权限
+      //If the current user has the permissions of a sub-Item of this Item
       return !!item.children.find((child) => roles.includes(child.role));
     }
     return false;
   };
-  // 菜单渲染
+  //Menu rendering
   getMenuNodes = (menuList) => {
-    // 得到当前请求的路由路径
+    //Get the route path of the current request
     const path = this.props.location.pathname;
     return menuList.reduce((pre, item) => {
       if (this.filterMenuItem(item)) {
@@ -51,18 +51,18 @@ class Meun extends Component {
             </Menu.Item>
           );
         } else {
-          // 查找一个与当前请求路径匹配的子Item
+          //Find a child item that matches the current request path
           const cItem = item.children.find(
             (cItem) => path.indexOf(cItem.path) === 0
           );
-          // 如果存在, 说明当前item的子列表需要打开
+          //If there is, it means that the child list of the current item needs to be opened.
           if (cItem) {
             this.setState((state) => ({
               openKey: [...state.openKey, item.path],
             }));
           }
 
-          // 向pre添加<SubMenu>
+          //Add <SubMenu> to Pre
           pre.push(
             <SubMenu
               key={item.path}

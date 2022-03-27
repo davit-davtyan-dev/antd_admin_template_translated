@@ -30,14 +30,14 @@ const columns = [
 ];
 
 class TransactionTable extends Component {
-  _isMounted = false;   // 这个变量是用来标志当前组件是否挂载
+  _isMounted = false;   // This variable is used to mark whether the current component is mounted.
   state = {
     list: [],
   };
   fetchData = () => {
     transactionList().then((response) => {
       const list = response.data.data.items.slice(0, 13);
-      if (this._isMounted) { 
+      if (this._isMounted) {
         this.setState({ list });
       }
     });

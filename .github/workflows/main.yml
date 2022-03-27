@@ -17,16 +17,16 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      # 拉取代码
+      # Take the code
       - name: Checkout
         uses: actions/checkout@v2
         with:
           persist-credentials: false
 
-      # 生成静态文件
+      # Generate static files
       - name: Build
-        run: npm install && npm run build 
-      # 部署到 GitHub Pages
+        run: npm install && npm run build
+      # Deploy GitHub Pages
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
