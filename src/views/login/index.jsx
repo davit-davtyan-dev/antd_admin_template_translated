@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
-import { Form, Icon, Input, Button, message, Spin } from "antd";
+import { Form, Icon, Input, Button, message, Spin, Row, Col } from "antd";
 import { connect } from "react-redux";
 import DocumentTitle from "react-document-title";
-import "./index.less";
 import { login, getUserInfo } from "@/store/actions";
+import BackgroundImage from "@/assets/images/farm-bg.jpg";
+import "./index.less";
 
 const Login = (props) => {
   const { form, token, login, getUserInfo } = props;
@@ -55,61 +56,10 @@ const Login = (props) => {
     return <Redirect to="/dashboard" />;
   }
   return (
-    <DocumentTitle title="User login">
-      <div className="login-container">
-        <Form onSubmit={handleSubmit} className="content">
-          <div className="title">
-            <h2>User login</h2>
-          </div>
-          <Spin spinning={loading} tip="logging in...">
-            <Form.Item>
-              {getFieldDecorator("username", {
-                rules: [
-                  {
-                    required: true,
-                    whitespace: true,
-                    message: "please enter user name",
-                  },
-                ],
-                initialValue: "admin", // Initial value
-              })(
-                <Input
-                  prefix={
-                    <Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />
-                  }
-                  placeholder="username"
-                />
-              )}
-            </Form.Item>
-            <Form.Item>
-              {getFieldDecorator("password", {
-                rules: [
-                  {
-                    required: true,
-                    whitespace: true,
-                    message: "Please enter your password",
-                  },
-                ],
-                initialValue: "123456", // Initial value
-              })(
-                <Input
-                  prefix={
-                    <Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />
-                  }
-                  type="password"
-                  placeholder="password"
-                />
-              )}
-            </Form.Item>
-            <Form.Item>
-              <Button
-                type="primary"
-                htmlType="submit"
-                className="login-form-button"
-              >
-                Log in
-              </Button>
-            </Form.Item>
+    <DocumentTitle title="Login">
+      <Row className="container">
+        <Col xxl={6} xl={8} md={10} className="login-form-container">
+          <Form onSubmit={handleSubmit} className="content">
             <Form.Item>
               <span>Account: admin Password: Just fill in</span>
               <br />
@@ -117,9 +67,65 @@ const Login = (props) => {
               <br />
               <span>Account: Guest Password: Just fill in</span>
             </Form.Item>
-          </Spin>
-        </Form>
-      </div>
+            <div className="title">
+              <h2>Login</h2>
+            </div>
+            <Spin spinning={loading} tip="logging in...">
+              <Form.Item>
+                {getFieldDecorator("username", {
+                  rules: [
+                    {
+                      required: true,
+                      whitespace: true,
+                      message: "please enter user name",
+                    },
+                  ],
+                  initialValue: "admin", // Initial value
+                })(
+                  <Input
+                    prefix={
+                      <Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />
+                    }
+                    placeholder="username"
+                  />
+                )}
+              </Form.Item>
+              <Form.Item>
+                {getFieldDecorator("password", {
+                  rules: [
+                    {
+                      required: true,
+                      whitespace: true,
+                      message: "Please enter your password",
+                    },
+                  ],
+                  initialValue: "123456", // Initial value
+                })(
+                  <Input
+                    prefix={
+                      <Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />
+                    }
+                    type="password"
+                    placeholder="password"
+                  />
+                )}
+              </Form.Item>
+              <Form.Item>
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  className="login-form-button"
+                >
+                  Log in
+                </Button>
+              </Form.Item>
+            </Spin>
+          </Form>
+        </Col>
+        <Col xxl={18} xl={16} md={14} className="image-container">
+          <img src={BackgroundImage} />
+        </Col>
+      </Row>
     </DocumentTitle>
   );
 };
