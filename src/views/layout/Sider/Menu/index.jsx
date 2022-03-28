@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { addTag } from "@/store/actions";
 import { getMenuItemInMenuListByProperty } from "@/utils";
+import { withTranslation } from 'react-i18next';
 import menuList from "@/config/menuConfig";
 import "./index.less";
 const SubMenu = Menu.SubMenu;
@@ -46,7 +47,7 @@ class Meun extends Component {
             <Menu.Item key={item.path}>
               <Link to={item.path}>
                 {item.Icon ? <item.Icon /> : null}
-                <span>{item.title}</span>
+                <span>{this.props.t(item.title)}</span>
               </Link>
             </Menu.Item>
           );
@@ -69,7 +70,7 @@ class Meun extends Component {
               title={
                 <span>
                   {item.Icon ? <item.Icon /> : null}
-                  <span>{item.title}</span>
+                  <span>{this.props.t(item.title)}</span>
                 </span>
               }
             >
@@ -154,4 +155,4 @@ class Meun extends Component {
   }
 }
 
-export default connect((state) => state.user, { addTag })(withRouter(Meun));
+export default connect((state) => state.user, { addTag })(withTranslation("menuList")(withRouter(Meun)));
