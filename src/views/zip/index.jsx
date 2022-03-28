@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Table, Tag, Form, Icon, Button, Input, message, Collapse } from "antd";
+import { Table, Tag, Form, Button, Input, message, Collapse } from "antd";
+import { FileOutlined } from "@ant-design/icons";
 import { excelList } from "@/api/excel";
 const { Panel } = Collapse;
 const columns = [
@@ -116,7 +117,7 @@ class Zip extends Component {
                 <Input
                   style={{ width: "250px" }}
                   prefix={
-                    <Icon type="file" style={{ color: "rgba(0,0,0,.25)" }} />
+                    <FileOutlined style={{ color: "rgba(0,0,0,.25)" }} />
                   }
                   placeholder="Please enter the file name(Default file)"
                   onChange={this.filenameChange}

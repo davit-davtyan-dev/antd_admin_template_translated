@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
-import { Form, Icon, Input, Button, message, Spin, Row, Col } from "antd";
+import { Form, Input, Button, message, Spin, Row, Col } from "antd";
+import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { connect } from "react-redux";
 import DocumentTitle from "react-document-title";
 import { login, getUserInfo } from "@/store/actions";
@@ -8,8 +9,8 @@ import BackgroundImage from "@/assets/images/farm-bg.jpg";
 import "./index.less";
 
 const Login = (props) => {
-  const { form, token, login, getUserInfo } = props;
-  const { getFieldDecorator } = form;
+  const { token, login, getUserInfo } = props;
+  const [form] = Form.useForm();
 
   const [loading, setLoading] = useState(false);
 
@@ -36,20 +37,18 @@ const Login = (props) => {
       });
   };
 
-  const handleSubmit = (event) => {
-    // Blocking the default behavior
-    event.preventDefault();
-
+  const handleSubmit = () => {
     // Test all form fields
-    form.validateFields((err, values) => {
-      // Inspection success
-      if (!err) {
+    const values = form.getFieldsValue();
+    form
+      .validateFields()
+      .then(async (values) => {
         const { username, password } = values;
         handleLogin(username, password);
-      } else {
-        console.log("Test failure!");
-      }
-    });
+      })
+      .catch(({ errorFields }) => {
+        form.scrollToField(errorFields?.[0]?.name);
+      });
   };
 
   if (token) {
@@ -59,7 +58,14 @@ const Login = (props) => {
     <DocumentTitle title="Login">
       <Row className="container">
         <Col xxl={6} xl={8} md={10} className="login-form-container">
-          <Form onSubmit={handleSubmit} className="content">
+          <Form
+            form={form}
+            onFinish={handleSubmit}
+            className="content"
+            initialValues={{
+              username: "admin",
+            }}
+          >
             <Form.Item>
               <span>Account: admin Password: Just fill in</span>
               <br />
@@ -71,44 +77,36 @@ const Login = (props) => {
               <h2>Login</h2>
             </div>
             <Spin spinning={loading} tip="logging in...">
-              <Form.Item>
-                {getFieldDecorator("username", {
-                  rules: [
-                    {
-                      required: true,
-                      whitespace: true,
-                      message: "please enter user name",
-                    },
-                  ],
-                  initialValue: "admin", // Initial value
-                })(
-                  <Input
-                    prefix={
-                      <Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />
-                    }
-                    placeholder="username"
-                  />
-                )}
+              <Form.Item
+                name="username"
+                rules={[
+                  {
+                    required: true,
+                    whitespace: true,
+                    message: "Please enter user name",
+                  },
+                ]}
+              >
+                <Input
+                  prefix={<UserOutlined style={{ color: "rgba(0,0,0,.25)" }} />}
+                  placeholder="Username"
+                />
               </Form.Item>
-              <Form.Item>
-                {getFieldDecorator("password", {
-                  rules: [
-                    {
-                      required: true,
-                      whitespace: true,
-                      message: "Please enter your password",
-                    },
-                  ],
-                  initialValue: "123456", // Initial value
-                })(
-                  <Input
-                    prefix={
-                      <Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />
-                    }
-                    type="password"
-                    placeholder="password"
-                  />
-                )}
+              <Form.Item
+                name="password"
+                rules={[
+                  {
+                    required: true,
+                    whitespace: true,
+                    message: "Please enter your password",
+                  },
+                ]}
+              >
+                <Input
+                  prefix={<LockOutlined style={{ color: "rgba(0,0,0,.25)" }} />}
+                  type="password"
+                  placeholder="Password"
+                />
               </Form.Item>
               <Form.Item>
                 <Button
@@ -130,8 +128,4 @@ const Login = (props) => {
   );
 };
 
-const WrapLogin = Form.create()(Login);
-
-export default connect((state) => state.user, { login, getUserInfo })(
-  WrapLogin
-);
+export default connect((state) => state.user, { login, getUserInfo })(Login);

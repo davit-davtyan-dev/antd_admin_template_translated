@@ -12,7 +12,7 @@ The development inspiration of this system comes from [Vue-Element-Admin] (https
 
 In fact, my primary technology stack has always been `Vue`, just recently entered the pit`, watched a long-month document, just try the cattle knife, haha. There is not that sentence: The best way to check the learning results is the wave. So, make such a wheel, haha. For `react`, I am a small white, there is definitely a good place in the project, welcome you to mention the` PR` or `Issue`.
 
-- [Online Preview] (https://nlrx-wjc.github.io/react-antd-admin-teemplate/)
+- [Online Preview] (https://nlrx-wjc.github.io/react-antd-admin-template)
 - [Gitee Online Preview (domestic users can access this address)] (https://nlrx.gitee.io/react-antd-admin-template/)
 - [Development Document] (https://nlrx-wjc.github.io/react-antd-admin-template-doc/) is currently in full preparation ...
 

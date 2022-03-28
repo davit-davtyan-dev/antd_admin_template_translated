@@ -4,16 +4,20 @@ import moment from "moment";
 import "moment/locale/zh-cn";
 // moment.locale("zh-cn");
 class EditForm extends Component {
+  formRef = React.createRef();
+
+  componentDidMount() {
+    this.props.wrappedComponentRef(this.formRef);
+  }
+
   render() {
     const {
       visible,
       onCancel,
       onOk,
-      form,
       confirmLoading,
       currentRowData,
     } = this.props;
-    const { getFieldDecorator } = form;
     const { id, author, date, readings, star, status, title } = currentRowData;
     const formItemLayout = {
       labelCol: {
@@ -31,48 +35,56 @@ class EditForm extends Component {
         onOk={onOk}
         confirmLoading={confirmLoading}
       >
-        <Form {...formItemLayout}>
-          <Form.Item label="Serial number:">
-            {getFieldDecorator("id", {
-              initialValue: id,
-            })(<Input disabled />)}
+        <Form
+          {...formItemLayout}
+          ref={this.formRef}
+          initialValues={{
+            id,
+            title,
+            author,
+            readings,
+            star: star.length,
+            status,
+            date: moment(date || "YYYY-MM-DD HH:mm:ss"),
+          }}
+        >
+          <Form.Item name="id" label="Serial number:">
+            <Input disabled />
           </Form.Item>
-          <Form.Item label="title:">
-            {getFieldDecorator("title", {
-              rules: [{ required: true, message: "Please enter the title!" }],
-              initialValue: title,
-            })(<Input placeholder="title" />)}
+          <Form.Item
+            name="title"
+            label="title:"
+            rules={[{ required: true, message: "Please enter the title!" }]}
+          >
+            <Input placeholder="title" />
           </Form.Item>
-          <Form.Item label="author:">
-            {getFieldDecorator("author", {
-              initialValue: author,
-            })(<Input disabled />)}
+          <Form.Item name="author" label="author:">
+            <Input disabled />
           </Form.Item>
-          <Form.Item label="Reading quantity:">
-            {getFieldDecorator("readings", {
-              initialValue: readings,
-            })(<Input disabled />)}
+          <Form.Item name="readings" label="Reading quantity:">
+            <Input disabled />
           </Form.Item>
-          <Form.Item label="Recommended:">
-            {getFieldDecorator("star", {
-              initialValue: star.length,
-            })(<Rate count={3} />)}
+          <Form.Item name="star" label="Recommended:">
+            <Rate count={3} />
           </Form.Item>
-          <Form.Item label="condition:">
-            {getFieldDecorator("status", {
-              initialValue: status,
-            })(
-              <Select style={{ width: 120 }}>
-                <Select.Option value="published">published</Select.Option>
-                <Select.Option value="draft">draft</Select.Option>
-              </Select>
-            )}
+          <Form.Item name="status" label="condition:">
+            <Select style={{ width: 120 }}>
+              <Select.Option value="published">published</Select.Option>
+              <Select.Option value="draft">draft</Select.Option>
+            </Select>
           </Form.Item>
-          <Form.Item label="time:">
-            {getFieldDecorator("date", {
-              rules: [{ type: 'object', required: true, message: 'Please select time!' }],
-              initialValue: moment(date || "YYYY-MM-DD HH:mm:ss"),
-            })(<DatePicker showTime format="YYYY-MM-DD HH:mm:ss" />)}
+          <Form.Item
+            name="date"
+            label="time:"
+            rules={[
+              {
+                type: "object",
+                required: true,
+                message: "Please select time!",
+              },
+            ]}
+          >
+            <DatePicker showTime format="YYYY-MM-DD HH:mm:ss" />
           </Form.Item>
         </Form>
       </Modal>
@@ -80,4 +92,4 @@ class EditForm extends Component {
   }
 }
 
-export default Form.create({ name: "EditForm" })(EditForm);
+export default EditForm;

@@ -1,10 +1,13 @@
 import React, { Component } from "react";
 import { Card, Button, Table, message, Divider } from "antd";
+import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { getUsers, deleteUser, editUser, addUser } from "@/api/user";
 import TypingCard from '@/components/TypingCard'
 import EditUserForm from "./forms/edit-user-form"
 import AddUserForm from "./forms/add-user-form"
+
 const { Column } = Table;
+
 class User extends Component {
   state = {
     users: [],
@@ -43,22 +46,29 @@ class User extends Component {
   }
 
   handleEditUserOk = _ => {
-    const { form } = this.editUserFormRef.props;
-    form.validateFields((err, values) => {
-      if (err) {
-        return;
-      }
-      this.setState({ editModalLoading: true, });
-      editUser(values).then((response) => {
-        form.resetFields();
-        this.setState({ editUserModalVisible: false, editUserModalLoading: false });
-        message.success("Edited success!")
-        this.getUsers()
-      }).catch(e => {
-        message.success("Editing fails, please try again!")
+    const { editUserFormRef } = this;
+    editUserFormRef.current
+      .validateFields()
+      .then((values) => {
+        this.setState({ editModalLoading: true });
+        editUser(values)
+          .then((response) => {
+            editUserFormRef.current.resetFields();
+            this.setState({
+              editUserModalVisible: false,
+              editUserModalLoading: false,
+            });
+            message.success("Edited success!");
+            this.getUsers();
+          })
+          .catch((e) => {
+            message.success("Editing fails, please try again!");
+          });
       })
-
-    });
+      .catch(({ errorFields }) => {
+        console.log("Test failure!");
+        editUserFormRef.current.scrollToField(errorFields?.[0]?.name);
+      });
   };
 
   handleCancel = _ => {
@@ -75,21 +85,28 @@ class User extends Component {
   };
 
   handleAddUserOk = _ => {
-    const { form } = this.addUserFormRef.props;
-    form.validateFields((err, values) => {
-      if (err) {
-        return;
-      }
-      this.setState({ addUserModalLoading: true, });
-      addUser(values).then((response) => {
-        form.resetFields();
-        this.setState({ addUserModalVisible: false, addUserModalLoading: false });
-        message.success("Added successfully!")
-        this.getUsers()
-      }).catch(e => {
-        message.success("Adding a failure, please try again!")
+    const { addUserFormRef } = this;
+    addUserFormRef.current
+      .validateFields()
+      .then((values) => {
+        this.setState({ addUserModalLoading: true });
+        addUser(values)
+          .then((response) => {
+            addUserFormRef.current.resetFields();
+            this.setState({
+              addUserModalVisible: false,
+              addUserModalLoading: false,
+            });
+            message.success("Added successfully!");
+            this.getUsers();
+          })
+          .catch((e) => {
+            message.success("Adding a failure, please try again!");
+          });
       })
-    });
+      .catch(({ errorFields }) => {
+        addUserFormRef.current.scrollToField(errorFields?.[0]?.name);
+      });
   };
   componentDidMount() {
     this.getUsers()
@@ -114,9 +131,9 @@ class User extends Component {
             <Column title="User description" dataIndex="description" key="description" align="center" />
             <Column title="operate" key="action" width={195} align="center"render={(text, row) => (
               <span>
-                <Button type="primary" shape="circle" icon="edit" title="edit" onClick={this.handleEditUser.bind(null,row)}/>
+                <Button type="primary" shape="circle" icon={<EditOutlined />} title="edit" onClick={this.handleEditUser.bind(null,row)}/>
                 <Divider type="vertical" />
-                <Button type="primary" shape="circle" icon="delete" title="delete" onClick={this.handleDeleteUser.bind(null,row)}/>
+                <Button type="primary" shape="circle" icon={<DeleteOutlined />} title="delete" onClick={this.handleDeleteUser.bind(null,row)}/>
               </span>
             )}/>
           </Table>

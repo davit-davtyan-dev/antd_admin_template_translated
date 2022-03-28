@@ -11,6 +11,7 @@ import {
   message,
   Select
 } from "antd";
+import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { tableList, deleteItem,editItem } from "@/api/table";
 import EditForm from "./forms/editForm"
 const { Column } = Table;
@@ -124,27 +125,29 @@ class TableComponent extends Component {
   };
 
   handleOk = _ => {
-    const { form } = this.formRef.props;
-    form.validateFields((err, fieldsValue) => {
-      if (err) {
-        return;
-      }
-      const values = {
-        ...fieldsValue,
-        'star': "".padStart(fieldsValue['star'], '★'),
-        'date': fieldsValue['date'].format('YYYY-MM-DD HH:mm:ss'),
-      };
-      this.setState({ editModalLoading: true, });
-      editItem(values).then((response) => {
-        form.resetFields();
-        this.setState({ editModalVisible: false, editModalLoading: false });
-        message.success("Edited success!")
-        this.fetchData()
-      }).catch(e => {
-        message.success("Editing fails, please try again!")
+    const { formRef } = this;
+    formRef.current.validateFields()
+      .then((fieldsValue) => {
+        const values = {
+          ...fieldsValue,
+          star: "".padStart(fieldsValue["star"], "★"),
+          date: fieldsValue["date"].format("YYYY-MM-DD HH:mm:ss"),
+        };
+        this.setState({ editModalLoading: true });
+        editItem(values)
+          .then((response) => {
+            formRef.current.resetFields();
+            this.setState({ editModalVisible: false, editModalLoading: false });
+            message.success("Edited success!");
+            this.fetchData();
+          })
+          .catch((e) => {
+            message.success("Editing fails, please try again!");
+          });
       })
-
-    });
+      .catch(({ errorFields }) => {
+        formRef.current.scrollToField(errorFields?.[0]?.name);
+      });
   };
 
   handleCancel = _ => {
@@ -209,11 +212,11 @@ class TableComponent extends Component {
             );
           }}/>
           <Column title="time" dataIndex="date" key="date" width={195} align="center"/>
-          <Column title="operate" key="action" width={195} align="center"render={(text, row) => (
+          <Column title="operate" key="action" width={195} align="center" render={(text, row) => (
             <span>
-              <Button type="primary" shape="circle" icon="edit" title="edit" onClick={this.handleEdit.bind(null,row)}/>
+              <Button type="primary" shape="circle" icon={<EditOutlined />} title="Edit" onClick={this.handleEdit.bind(null,row)}/>
               <Divider type="vertical" />
-              <Button type="primary" shape="circle" icon="delete" title="delete" onClick={this.handleDelete.bind(null,row)}/>
+              <Button type="primary" shape="circle" icon={<DeleteOutlined />} title="delete" onClick={this.handleDelete.bind(null,row)}/>
             </span>
           )}/>
         </Table>

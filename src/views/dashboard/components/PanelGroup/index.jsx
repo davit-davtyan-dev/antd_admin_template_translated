@@ -1,30 +1,36 @@
 import React from "react";
-import { Row, Col, Icon } from "antd";
+import { Row, Col } from "antd";
+import {
+  UserOutlined,
+  MessageOutlined,
+  PayCircleOutlined,
+  ShoppingCartOutlined,
+} from "@ant-design/icons";
 import CountUp from "react-countup";
 import "./index.less";
 
 const chartList = [
   {
     type: "New Visits",
-    icon: "user",
+    Icon: UserOutlined,
     num: 102400,
     color: "#40c9c6",
   },
   {
     type: "Messages",
-    icon: "message",
+    Icon: MessageOutlined,
     num: 81212,
     color: "#36a3f7",
   },
   {
     type: "Purchases",
-    icon: "pay-circle",
+    Icon: PayCircleOutlined,
     num: 9280,
     color: "#f4516c",
   },
   {
     type: "Shoppings",
-    icon: "shopping-cart",
+    Icon: ShoppingCartOutlined,
     num: 13600,
     color: "#f6ab40",
   },
@@ -46,10 +52,9 @@ const PanelGroup = (props) => {
           >
             <div className="card-panel">
               <div className="card-panel-icon-wrapper">
-                <Icon
+                <chart.Icon
                   className={chart.type}
                   style={{ fontSize: 55, color: chart.color }}
-                  type={chart.icon}
                 />
               </div>
               <div className="card-panel-description">

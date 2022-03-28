@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Icon, Menu, Dropdown, Modal, Layout, Avatar } from "antd";
+import { Menu, Dropdown, Modal, Layout, Avatar } from "antd";
+import { CaretDownOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import { logout, getUserInfo } from "@/store/actions";
 import FullScreen from "@/components/FullScreen";
@@ -87,7 +88,7 @@ const LayoutHeader = (props) => {
             <Dropdown overlay={menu}>
               <div>
                 <Avatar shape="square" size="medium" src={avatar} />
-                <Icon style={{ color: "rgba(0,0,0,.3)" }} type="caret-down" />
+                <CaretDownOutlined style={{ color: "rgba(0,0,0,.3)" }} />
               </div>
             </Dropdown>
           </div>

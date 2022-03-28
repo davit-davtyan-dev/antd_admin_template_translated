@@ -9,9 +9,9 @@ import { Layout } from "antd";
 const Main = (props) => {
   const { tagsView } = props;
   return (
-    <Layout style={{ minHeight: "100vh" }}>
+    <Layout style={{ minHeight: "100vh" }} hasSider>
       <Sider />
-      <Layout>
+      <Layout className="site-layout" style={{ marginLeft: 200 }}>
         <Header />
         {tagsView ? <TagsView /> : null}
         <Content />

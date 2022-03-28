@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { Drawer, Switch, Row, Col, Divider, Alert, Icon, Button } from "antd";
+import { Drawer, Switch, Row, Col, Divider, Alert, Button } from "antd";
+import { NotificationOutlined } from "@ant-design/icons";
 import { toggleSettingPanel, changeSetting } from "@/store/actions";
 import clip from "@/utils/clipboard";
 
@@ -103,7 +104,7 @@ const RightPanel = (props) => {
               description="The configuration bar is only used in the development environment for preview, the production environment will not present, please copy the /src/defaultsettings.js configuration file after copying"
               type="warning"
               showIcon
-              icon={<Icon type="notification" />}
+              icon={<NotificationOutlined />}
               style={{ marginBottom: "16px" }}
             />
             <Button style={{ width: "100%" }} icon="copy" onClick={handleCopy}>

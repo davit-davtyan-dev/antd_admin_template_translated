@@ -2,17 +2,20 @@ import React, { Component } from "react";
 import { Form, Input, Select, Modal } from "antd";
 const { TextArea } = Input;
 class EditUserForm extends Component {
+  formRef = React.createRef();
+
+  componentDidMount() {
+    this.props.wrappedComponentRef(this.formRef);
+  }
+
   render() {
     const {
       visible,
       onCancel,
       onOk,
-      form,
       confirmLoading,
       currentRowData,
     } = this.props;
-    const { getFieldDecorator } = form;
-    const { id, name, role, description } = currentRowData;
     const formItemLayout = {
       labelCol: {
         sm: { span: 4 },
@@ -29,33 +32,33 @@ class EditUserForm extends Component {
         onOk={onOk}
         confirmLoading={confirmLoading}
       >
-        <Form {...formItemLayout}>
-          <Form.Item label="User ID:">
-            {getFieldDecorator("id", {
-              initialValue: id,
-            })(<Input disabled />)}
+        <Form
+          ref={this.formRef}
+          {...formItemLayout}
+          initialValues={currentRowData}
+        >
+          <Form.Item name="id" label="User ID:">
+            <Input disabled />
           </Form.Item>
-          <Form.Item label="user name:">
-            {getFieldDecorator("name", {
-              rules: [{ required: true, message: "Please enter the user name!" }],
-              initialValue: name,
-            })(<Input placeholder="Please enter the user name" />)}
+          <Form.Item
+            name="name"
+            label="user name:"
+            rules={[{ required: true, message: "Please enter the user name!" }]}
+          >
+            <Input placeholder="Please enter the user name" />
           </Form.Item>
-          <Form.Item label="User role:">
-            {getFieldDecorator("role", {
-              initialValue: role,
-            })(
-              <Select style={{ width: 120 }} disabled={id === "admin"}>
-                <Select.Option value="admin">admin</Select.Option>
-                <Select.Option value="editor">editor</Select.Option>
-                <Select.Option value="guest">guest</Select.Option>
-              </Select>
-            )}
+          <Form.Item name="role" label="User role:">
+            <Select style={{ width: 120 }} disabled={currentRowData.id === "admin"}>
+              <Select.Option value="admin">admin</Select.Option>
+              <Select.Option value="editor">editor</Select.Option>
+              <Select.Option value="guest">guest</Select.Option>
+            </Select>
           </Form.Item>
-          <Form.Item label="User description:">
-            {getFieldDecorator("description", {
-              initialValue: description,
-            })(<TextArea rows={4} placeholder="Please enter the user description" />)}
+          <Form.Item name="description" label="User description:">
+            <TextArea
+              rows={4}
+              placeholder="Please enter the user description"
+            />
           </Form.Item>
         </Form>
       </Modal>
@@ -63,4 +66,4 @@ class EditUserForm extends Component {
   }
 }
 
-export default Form.create({ name: "EditUserForm" })(EditUserForm);
+export default EditUserForm;
