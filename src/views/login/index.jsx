@@ -31,7 +31,7 @@ const Login = (props) => {
   // Get user information
   const handleUserInfo = (token) => {
     getUserInfo(token)
-      .then((data) => {})
+      .then((_data) => {})
       .catch((error) => {
         message.error(error);
       });
@@ -39,7 +39,6 @@ const Login = (props) => {
 
   const handleSubmit = () => {
     // Test all form fields
-    const values = form.getFieldsValue();
     form
       .validateFields()
       .then(async (values) => {
@@ -121,7 +120,7 @@ const Login = (props) => {
           </Form>
         </Col>
         <Col xxl={18} xl={16} md={14} className="image-container">
-          <img src={BackgroundImage} />
+          <img src={BackgroundImage} alt="background" />
         </Col>
       </Row>
     </DocumentTitle>

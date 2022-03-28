@@ -40,15 +40,15 @@ const BreadCrumb = (props) => {
   const { pathname } = location;
   let path = getPath(menuList, pathname);
   const first = path && path[0];
-  if (first && first.title.trim() !== "front page") {
-    path = [{ title: "front page", path: "/dashboard" }].concat(path);
+  if (first && first.title.trim() !== "Dashboard") {
+    path = [{ title: "Dashboard", path: "/dashboard" }].concat(path);
   }
   return (
     <div className="Breadcrumb-container">
       <Breadcrumb>
         {path &&
           path.map((item) =>
-            item.title === "front page" ? (
+            item.title === "Dashboard" ? (
               <Breadcrumb.Item key={item.path}>
                 <a href={`#${item.path}`}>{item.title}</a>
               </Breadcrumb.Item>
